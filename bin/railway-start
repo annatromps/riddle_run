@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+echo "==> Env check: SECRET_KEY_BASE=${SECRET_KEY_BASE:+set} RAILS_MASTER_KEY=${RAILS_MASTER_KEY:+set} RAILS_ENV=${RAILS_ENV}"
 echo "==> Preparing database..."
 bundle exec rails db:prepare
 

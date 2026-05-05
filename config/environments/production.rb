@@ -3,6 +3,10 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Explicitly set secret_key_base from env var, bypassing encrypted credentials.
+  # This means only SECRET_KEY_BASE needs to be set in Railway — no RAILS_MASTER_KEY required.
+  config.secret_key_base = ENV["SECRET_KEY_BASE"] || raise("SECRET_KEY_BASE env var is not set")
+
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
