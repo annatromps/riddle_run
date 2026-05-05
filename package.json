@@ -1,0 +1,8 @@
+{
+  "name": "riddle-run-scripts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "fetch-cryptic": "node scripts/fetch-cryptic-clues.mjs"
+  }
+}
