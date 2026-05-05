@@ -7,18 +7,18 @@ class RunsController < ApplicationController
   end
 
   def create
-    difficulty = params[:difficulty].presence_in(Run::DIFFICULTIES) || "any"
-    riddle_count = params[:riddle_count].to_i.clamp(1, 20)
-
-    scope = Riddle.published
-    scope = scope.by_difficulty(difficulty) unless difficulty == "any"
-    riddles = scope.order(Arel.sql("RANDOM()")).limit(riddle_count).to_a
+    riddles = Riddle.published.order(Arel.sql("RANDOM()")).to_a
 
     if riddles.empty?
-      redirect_to new_run_path, alert: "No riddles available for that difficulty." and return
+      redirect_to new_run_path, alert: "No puzzles available yet." and return
     end
 
-    @run = Run.new(difficulty: difficulty, riddle_count: riddles.count)
+    @run = Run.new(
+      audio_enabled:     params[:audio_enabled] == "1",
+      timed:             params[:timed] == "1",
+      seconds_per_puzzle: params[:seconds_per_puzzle].to_i.clamp(10, 90),
+      auto_advance:      params[:auto_advance] == "1"
+    )
 
     Run.transaction do
       @run.save!

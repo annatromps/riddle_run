@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_05_103049) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_05_110415) do
   create_table "attempts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "outcome"
@@ -36,12 +36,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_05_103049) do
   end
 
   create_table "runs", force: :cascade do |t|
+    t.boolean "audio_enabled", default: true, null: false
+    t.boolean "auto_advance", default: true, null: false
     t.datetime "completed_at"
     t.datetime "created_at", null: false
     t.string "difficulty", null: false
     t.integer "riddle_count", null: false
+    t.integer "seconds_per_puzzle", default: 30
     t.string "session_token", null: false
     t.datetime "started_at", null: false
+    t.boolean "timed", default: false, null: false
     t.datetime "updated_at", null: false
     t.index ["session_token"], name: "index_runs_on_session_token", unique: true
   end

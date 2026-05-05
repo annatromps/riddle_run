@@ -4,12 +4,12 @@ class Run < ApplicationRecord
   has_many :attempts, -> { order(:position) }, dependent: :destroy
   has_many :riddles, through: :attempts
 
-  before_validation :set_session_token, on: :create
+  before_validation :set_defaults, on: :create
 
-  validates :difficulty, presence: true, inclusion: { in: DIFFICULTIES }
-  validates :riddle_count, numericality: { only_integer: true, greater_than: 0 }
   validates :session_token, presence: true, uniqueness: true
-  validates :started_at, presence: true
+  validates :difficulty, inclusion: { in: DIFFICULTIES }
+  validates :riddle_count, numericality: { only_integer: true, greater_than: 0 }
+  validates :seconds_per_puzzle, numericality: { only_integer: true, greater_than: 0 }, allow_nil: true
 
   def complete?
     completed_at.present?
@@ -25,8 +25,10 @@ class Run < ApplicationRecord
 
   private
 
-  def set_session_token
+  def set_defaults
     self.session_token = SecureRandom.urlsafe_base64(16)
-    self.started_at ||= Time.current
+    self.started_at   ||= Time.current
+    self.difficulty   ||= "any"
+    self.riddle_count ||= Riddle.published.count
   end
 end

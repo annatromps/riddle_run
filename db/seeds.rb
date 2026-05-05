@@ -1,191 +1,209 @@
-riddles = [
-  # --- EASY ---
+puzzles = [
+  # ── WORD SANDWICHES ─────────────────────────────────────────────────────────
+  # Which single word completes both compounds?
   {
-    question: "I have hands but I can't clap. What am I?",
-    answer: "A clock",
-    hint: "You check me when you're wondering if you're late.",
+    category: "word_sandwich",
     difficulty: "easy",
-    category: "wordplay",
-    thinking_seconds: 25
+    thinking_seconds: 25,
+    question: "Which word goes after PAPER and before BONE?",
+    answer: "BACK — PAPERBACK · BACKBONE"
   },
   {
-    question: "I'm light as a feather, but even the world's strongest person can't hold me for more than a few minutes. What am I?",
-    answer: "Breath",
-    hint: "You're doing it right now.",
+    category: "word_sandwich",
     difficulty: "easy",
-    category: "wordplay",
-    thinking_seconds: 25
+    thinking_seconds: 25,
+    question: "Which word goes after SUN and before POT?",
+    answer: "FLOWER — SUNFLOWER · FLOWERPOT"
   },
   {
-    question: "The more you take, the more you leave behind. What am I?",
-    answer: "Footsteps",
-    hint: "Especially relevant on a run.",
+    category: "word_sandwich",
     difficulty: "easy",
-    category: "wordplay",
-    thinking_seconds: 25
+    thinking_seconds: 25,
+    question: "Which word goes after BLACK and before CAGE?",
+    answer: "BIRD — BLACKBIRD · BIRDCAGE"
   },
   {
-    question: "I have cities but no houses. I have mountains but no trees. I have water but no fish. I have roads but no cars. What am I?",
-    answer: "A map",
-    hint: "You'd use me to plan a route.",
+    category: "word_sandwich",
     difficulty: "easy",
-    category: "logic",
-    thinking_seconds: 30
+    thinking_seconds: 25,
+    question: "Which word goes after BIRTH and before DREAM?",
+    answer: "DAY — BIRTHDAY · DAYDREAM"
   },
   {
-    question: "What has a head and a tail but no body?",
-    answer: "A coin",
-    hint: "You might have one in your pocket.",
-    difficulty: "easy",
-    category: "wordplay",
-    thinking_seconds: 25
+    category: "word_sandwich",
+    difficulty: "medium",
+    thinking_seconds: 30,
+    question: "Which word goes after HEAD and before AGE?",
+    answer: "BAND — HEADBAND · BANDAGE"
   },
   {
-    question: "I go up when the rain comes down. What am I?",
-    answer: "An umbrella",
-    hint: "You wish you had one right now if it's raining.",
-    difficulty: "easy",
-    category: "wordplay",
-    thinking_seconds: 20
+    category: "word_sandwich",
+    difficulty: "medium",
+    thinking_seconds: 30,
+    question: "Which word goes after HAND and before PIPE?",
+    answer: "BAG — HANDBAG · BAGPIPE"
   },
   {
-    question: "What can run but never walks, has a mouth but never talks, has a head but never weeps, has a bed but never sleeps?",
-    answer: "A river",
-    hint: "You might run alongside one.",
-    difficulty: "easy",
-    category: "nature",
-    thinking_seconds: 30
+    category: "word_sandwich",
+    difficulty: "medium",
+    thinking_seconds: 30,
+    question: "Which word goes after SEA and before STEP?",
+    answer: "SIDE — SEASIDE · SIDESTEP"
   },
   {
-    question: "I shrink every time you use me. What am I?",
-    answer: "A bar of soap",
-    hint: "You'll need me after this run.",
-    difficulty: "easy",
-    category: "wordplay",
-    thinking_seconds: 20
+    category: "word_sandwich",
+    difficulty: "hard",
+    thinking_seconds: 35,
+    question: "Which word goes after FINGER and before OUT?",
+    answer: "PRINT — FINGERPRINT · PRINTOUT"
   },
 
-  # --- MEDIUM ---
+  # ── ODD ONE OUT ──────────────────────────────────────────────────────────────
   {
-    question: "A man walks into a restaurant and orders albatross soup. After one sip, he goes home and kills himself. Why?",
-    answer: "He had been shipwrecked and starving. His companion died, and he was told he was eating albatross soup — but it was really his companion. Tasting real albatross soup, he knew the truth.",
-    hint: "He had eaten something similar before — but what he was told it was, and what it actually was, were very different things.",
-    difficulty: "medium",
-    category: "lateral",
-    thinking_seconds: 45
+    category: "odd_one_out",
+    difficulty: "easy",
+    thinking_seconds: 20,
+    question: "Odd one out: JUPITER, MARS, SATURN, PLUTO",
+    answer: "PLUTO — it's a dwarf planet, not a full planet (since 2006)"
   },
   {
-    question: "I have one eye but I cannot see. I'm stronger than you'd think. I help you travel far and wide, but I leave as soon as I arrive. What am I?",
-    answer: "A needle (the eye) — or a storm (eye of the storm)",
-    hint: "Think about things with an 'eye' that aren't eyes.",
-    difficulty: "medium",
-    category: "wordplay",
-    thinking_seconds: 35
+    category: "odd_one_out",
+    difficulty: "easy",
+    thinking_seconds: 20,
+    question: "Odd one out: VIOLIN, VIOLA, CELLO, FLUTE",
+    answer: "FLUTE — the others are all string instruments"
   },
   {
-    question: "Two fathers and two sons go fishing. They each catch one fish. Yet only three fish are caught in total. How?",
-    answer: "There are only three people: a grandfather, a father, and a son. The father is both a father and a son.",
-    hint: "How many people are actually there?",
+    category: "odd_one_out",
     difficulty: "medium",
-    category: "logic",
-    thinking_seconds: 40
+    thinking_seconds: 25,
+    question: "Odd one out: APRIL, JUNE, SEPTEMBER, OCTOBER",
+    answer: "OCTOBER — the others have 30 days; October has 31"
   },
   {
-    question: "A woman shoots her husband, then holds him underwater for five minutes. Twenty minutes later they go out to dinner together. How?",
-    answer: "She's a photographer. She shot him with a camera, then developed the photo in a darkroom.",
-    hint: "What does 'shoot' mean outside of weapons?",
+    category: "odd_one_out",
     difficulty: "medium",
-    category: "lateral",
-    thinking_seconds: 40
+    thinking_seconds: 25,
+    question: "Odd one out: PACIFIC, ATLANTIC, INDIAN, CASPIAN",
+    answer: "CASPIAN — it's a lake (or sea), not one of the world's oceans"
   },
   {
-    question: "I have no voice, yet I speak to you. I tell of all things in the world that people do. I have leaves, but I'm not a tree. I have pages, but I'm not a bride. What am I?",
-    answer: "A book",
-    hint: "You can't take me on a run very easily.",
-    difficulty: "medium",
-    category: "wordplay",
-    thinking_seconds: 30
-  },
-  {
-    question: "You see a boat filled with people. It has not sunk, but when you look again there is not a single person on the boat. Why?",
-    answer: "All the people on the boat are married — none are single.",
-    hint: "The word 'single' has more than one meaning.",
-    difficulty: "medium",
-    category: "wordplay",
-    thinking_seconds: 35
-  },
-  {
-    question: "A man is pushing his car along a road when he comes to a hotel. He shouts: 'I'm bankrupt!' Why?",
-    answer: "He's playing Monopoly.",
-    hint: "What game involves cars, hotels, and going bankrupt?",
-    difficulty: "medium",
-    category: "lateral",
-    thinking_seconds: 35
-  },
-  {
-    question: "The person who makes it sells it. The person who buys it never uses it. The person who uses it doesn't know they're using it. What is it?",
-    answer: "A coffin",
-    hint: "Think about something made for the very end.",
-    difficulty: "medium",
-    category: "logic",
-    thinking_seconds: 40
+    category: "odd_one_out",
+    difficulty: "hard",
+    thinking_seconds: 30,
+    question: "Odd one out: SPIDER, SCORPION, TICK, ANT",
+    answer: "ANT — it's an insect (6 legs); the others are arachnids (8 legs)"
   },
 
-  # --- HARD ---
+  # ── DOUBLE DEFINITIONS ───────────────────────────────────────────────────────
   {
-    question: "A man is found dead in a field. Next to him is an unopened package. There is no other person around. What happened?",
-    answer: "The man was skydiving and his parachute didn't open. The unopened package is the parachute.",
-    hint: "He was falling from a great height. What should have opened?",
-    difficulty: "hard",
-    category: "lateral",
-    thinking_seconds: 50
+    category: "double_definition",
+    difficulty: "easy",
+    thinking_seconds: 25,
+    question: "One word, two meanings: where you save money / the edge of a river",
+    answer: "BANK"
   },
   {
-    question: "I speak without a mouth and hear without ears. I have no body but I come alive with the wind. What am I?",
-    answer: "An echo",
-    hint: "You might hear one if you shout into a valley.",
-    difficulty: "hard",
-    category: "nature",
-    thinking_seconds: 40
+    category: "double_definition",
+    difficulty: "easy",
+    thinking_seconds: 25,
+    question: "One word, two meanings: a precious stone / a baseball playing field",
+    answer: "DIAMOND"
   },
   {
-    question: "You are in a room with three light switches. Each controls one of three bulbs in the next room. You may only enter the next room once. How do you figure out which switch controls which bulb?",
-    answer: "Turn on switch 1 for a few minutes, then turn it off and turn on switch 2. Enter the room: the hot bulb is switch 1, the lit bulb is switch 2, the cold dark bulb is switch 3.",
-    hint: "Light bulbs do something other than emit light when they've been on a while.",
-    difficulty: "hard",
-    category: "logic",
-    thinking_seconds: 60
+    category: "double_definition",
+    difficulty: "easy",
+    thinking_seconds: 20,
+    question: "One word, two meanings: a bird / zero runs in cricket",
+    answer: "DUCK"
   },
   {
-    question: "A man lives on the 30th floor of a building. Every morning he takes the lift down to the ground floor and goes to work. When he returns, on rainy days he takes the lift to the 30th floor — but on dry days he can only take it to the 15th floor and walks the rest. Why?",
-    answer: "He is too short to reach the button for the 30th floor. On rainy days he uses his umbrella to press it.",
-    hint: "Why would the weather change which button he can press?",
-    difficulty: "hard",
-    category: "lateral",
-    thinking_seconds: 55
+    category: "double_definition",
+    difficulty: "medium",
+    thinking_seconds: 25,
+    question: "One word, two meanings: a season / a sudden jump",
+    answer: "SPRING"
   },
   {
-    question: "I am always in front of you but can never be seen. What am I?",
-    answer: "The future",
-    hint: "Every step you take, I stay the same distance ahead.",
-    difficulty: "hard",
-    category: "wordplay",
-    thinking_seconds: 40
+    category: "double_definition",
+    difficulty: "medium",
+    thinking_seconds: 30,
+    question: "One word, two meanings: the underside of a shoe / a type of flatfish",
+    answer: "SOLE"
   },
   {
-    question: "Four people need to cross a bridge at night. They have one torch and the bridge holds only two people. Each person walks at a different speed: 1, 2, 5, and 10 minutes. When two cross together, they go at the slower person's pace. How do they all cross in 17 minutes?",
-    answer: "1 and 2 cross (2 min). 1 returns (1 min). 5 and 10 cross (10 min). 2 returns (2 min). 1 and 2 cross (2 min). Total: 17 minutes.",
-    hint: "The trick is making sure the slowest two cross together, and using the fastest person as the return runner.",
+    category: "double_definition",
     difficulty: "hard",
-    category: "logic",
-    thinking_seconds: 60
+    thinking_seconds: 30,
+    question: "One word, two meanings: to desert someone / a physical exercise",
+    answer: "DITCH (to ditch = abandon; to ditch = dig a trench/channel) — or PRESS-UP if you read it differently. Primary answer: DITCH"
+  },
+
+  # ── LETTER EQUATIONS ─────────────────────────────────────────────────────────
+  {
+    category: "letter_equation",
+    difficulty: "easy",
+    thinking_seconds: 20,
+    question: "7 = D of the W",
+    answer: "Days of the Week"
+  },
+  {
+    category: "letter_equation",
+    difficulty: "easy",
+    thinking_seconds: 20,
+    question: "12 = M in a Y",
+    answer: "Months in a Year"
+  },
+  {
+    category: "letter_equation",
+    difficulty: "medium",
+    thinking_seconds: 25,
+    question: "88 = K on a P",
+    answer: "Keys on a Piano"
+  },
+  {
+    category: "letter_equation",
+    difficulty: "medium",
+    thinking_seconds: 25,
+    question: "64 = S on a CB",
+    answer: "Squares on a Chessboard"
+  },
+  {
+    category: "letter_equation",
+    difficulty: "medium",
+    thinking_seconds: 25,
+    question: "11 = P in a FT",
+    answer: "Players in a Football Team"
+  },
+  {
+    category: "letter_equation",
+    difficulty: "hard",
+    thinking_seconds: 30,
+    question: "360 = D in a C",
+    answer: "Degrees in a Circle"
+  },
+  {
+    category: "letter_equation",
+    difficulty: "hard",
+    thinking_seconds: 30,
+    question: "52 = W in a Y",
+    answer: "Weeks in a Year"
+  },
+  {
+    category: "letter_equation",
+    difficulty: "hard",
+    thinking_seconds: 35,
+    question: "1001 = AN",
+    answer: "1001 Arabian Nights"
   }
 ]
 
-riddles.each do |attrs|
+puzzles.each do |attrs|
   Riddle.find_or_create_by!(question: attrs[:question]) do |r|
     r.assign_attributes(attrs.merge(published: true))
   end
 end
 
-puts "Seeded #{Riddle.count} riddles (#{Riddle.by_difficulty('easy').count} easy, #{Riddle.by_difficulty('medium').count} medium, #{Riddle.by_difficulty('hard').count} hard)"
+by_type = Riddle.group(:category).count
+puts "Seeded #{Riddle.count} puzzles:"
+by_type.each { |type, n| puts "  #{type}: #{n}" }
