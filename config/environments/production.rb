@@ -3,6 +3,12 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  unless ENV["SECRET_KEY_BASE_DUMMY"]
+    config.secret_key_base =
+      ENV["SECRET_KEY_BASE"].presence ||
+      (ENV["RAILS_MASTER_KEY"] && ActiveSupport::KeyGenerator.new(ENV["RAILS_MASTER_KEY"], iterations: 1).generate_key("secret_key_base", 64).unpack1("H*")) ||
+      raise("Set SECRET_KEY_BASE or RAILS_MASTER_KEY in Railway Variables")
+  end
 
   # Code is not reloaded between requests.
   config.enable_reloading = false
