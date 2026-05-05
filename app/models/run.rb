@@ -2,6 +2,7 @@ class Run < ApplicationRecord
   DIFFICULTIES    = (Riddle::DIFFICULTIES + ["any"]).freeze
   QUESTION_STYLES = %w[word_puzzles cryptic mix].freeze
   WORD_CATEGORIES = %w[word_sandwich double_definition odd_one_out letter_equation lateral_thinking].freeze
+  PUZZLES_PER_RUN = 10
 
   has_many :attempts, -> { order(:position) }, dependent: :destroy
   has_many :riddles, through: :attempts

@@ -9,12 +9,12 @@ class RunsController < ApplicationController
   def create
     question_style = params[:question_style].presence_in(Run::QUESTION_STYLES) || "word_puzzles"
 
-    riddles = case question_style
-              when "cryptic" then Riddle.published.where(category: "cryptic")
-              when "mix"     then Riddle.published
-              else                Riddle.published.where(category: Run::WORD_CATEGORIES)
-              end
-    riddles = riddles.order(Arel.sql("RANDOM()")).to_a
+    pool = case question_style
+           when "cryptic" then Riddle.published.where(category: "cryptic")
+           when "mix"     then Riddle.published
+           else                Riddle.published.where(category: Run::WORD_CATEGORIES)
+           end
+    riddles = pool.order(Arel.sql("RANDOM()")).limit(Run::PUZZLES_PER_RUN).to_a
 
     if riddles.empty?
       redirect_to new_run_path, alert: "No puzzles available yet." and return
