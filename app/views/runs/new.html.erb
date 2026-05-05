@@ -1,9 +1,10 @@
 <% puzzle_count = Run::PUZZLES_PER_RUN %>
 
-<div class="h-dvh flex flex-col px-5 pt-5 pb-5 max-w-sm mx-auto">
+<div class="h-dvh flex flex-col px-6 max-w-sm mx-auto"
+     style="padding-top: clamp(1.25rem, 4vh, 2.5rem); padding-bottom: clamp(1.25rem, 4vh, 2rem);">
 
   <%# Pill badge %>
-  <div class="mb-3 flex-shrink-0">
+  <div class="mb-[3vh] flex-shrink-0">
     <span class="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-800
                  text-zinc-400 text-xs font-bold px-3 py-1.5 rounded-full tracking-widest uppercase">
       <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
@@ -12,28 +13,30 @@
   </div>
 
   <%# Hero %>
-  <div class="relative mb-4 flex-shrink-0">
-    <div class="absolute -top-4 -left-10 w-64 h-36
+  <div class="relative mb-[3vh] flex-shrink-0">
+    <div class="absolute -top-6 -left-10 w-72 h-48
                 bg-amber-500/10 blur-3xl rounded-full pointer-events-none"></div>
     <div class="relative">
       <h1 class="font-black uppercase leading-[0.85] tracking-tight"
-          style="font-size: clamp(2.75rem, 14vw, 4rem);">
+          style="font-size: clamp(3.25rem, 17vw, 5rem);">
         <span class="text-white block">RIDDLE</span>
         <span class="text-amber-400 block">RUN</span>
       </h1>
-      <p class="text-zinc-500 mt-2 text-sm leading-snug max-w-[240px]">
+      <p class="text-zinc-500 leading-snug max-w-[260px]"
+         style="margin-top: clamp(0.5rem, 1.5vh, 1rem); font-size: clamp(0.875rem, 2vh, 1rem);">
         Hard puzzles for long runs. No rush.
       </p>
     </div>
   </div>
 
+  <%# Form — justify-between distributes the three sections across remaining space %>
   <%= form_with url: runs_path, method: :post,
         data: { controller: "setup" },
-        class: "flex-1 flex flex-col gap-3 min-h-0" do %>
+        class: "flex-1 flex flex-col justify-between min-h-0" do %>
 
     <%# Question style cards %>
     <div class="flex-shrink-0">
-      <p class="text-xs uppercase tracking-widest text-zinc-600 font-semibold mb-2">Question style</p>
+      <p class="text-xs uppercase tracking-widest text-zinc-600 font-semibold mb-3">Question style</p>
       <div class="grid grid-cols-3 gap-2">
         <% [
              ["word_puzzles", "🔤", "Word",    "Classic puzzles"],
@@ -43,13 +46,13 @@
           <label class="cursor-pointer group">
             <input type="radio" name="question_style" value="<%= value %>"
                    class="sr-only" <%= i == 0 ? "checked" : "" %>>
-            <div class="border border-zinc-800 rounded-2xl p-2.5 text-center transition-all duration-150
+            <div class="border border-zinc-800 rounded-2xl p-3 text-center transition-all duration-150
                         group-has-[input:checked]:border-amber-400/60
                         group-has-[input:checked]:bg-amber-400/[0.05]">
-              <p class="text-lg mb-1"><%= icon %></p>
+              <p class="text-xl mb-1.5"><%= icon %></p>
               <p class="font-bold text-sm text-white leading-tight"><%= label %></p>
               <p class="text-zinc-600 text-[11px] mt-0.5 leading-tight"><%= sublabel %></p>
-              <p class="text-amber-400 text-xs font-black mt-1.5 h-3
+              <p class="text-amber-400 text-xs font-black mt-2 h-3
                         opacity-0 group-has-[input:checked]:opacity-100 transition-opacity">✓</p>
             </div>
           </label>
@@ -61,9 +64,9 @@
     <div class="flex-shrink-0 rounded-2xl border border-zinc-800 overflow-hidden divide-y divide-zinc-800 bg-zinc-900/50">
 
       <%# Audio row %>
-      <div class="flex items-center gap-3 px-4 py-3">
-        <div class="w-8 h-8 rounded-xl bg-zinc-800 flex items-center justify-center flex-shrink-0">
-          <span class="text-sm">🔊</span>
+      <div class="flex items-center gap-3 px-4 py-3.5">
+        <div class="w-9 h-9 rounded-xl bg-zinc-800 flex items-center justify-center flex-shrink-0">
+          <span class="text-base">🔊</span>
         </div>
         <div class="flex-1 min-w-0">
           <p class="font-semibold text-sm text-white">Audio</p>
@@ -80,9 +83,9 @@
       </div>
 
       <%# Timer row %>
-      <div class="flex items-center gap-3 px-4 py-3">
-        <div class="w-8 h-8 rounded-xl bg-zinc-800 flex items-center justify-center flex-shrink-0">
-          <span class="text-sm">⏱</span>
+      <div class="flex items-center gap-3 px-4 py-3.5">
+        <div class="w-9 h-9 rounded-xl bg-zinc-800 flex items-center justify-center flex-shrink-0">
+          <span class="text-base">⏱</span>
         </div>
         <div class="flex-1 min-w-0">
           <p class="font-semibold text-sm text-white">Timer</p>
@@ -103,8 +106,8 @@
       <div data-setup-target="timedOptions" class="hidden divide-y divide-zinc-800/60">
 
         <%# Seconds slider %>
-        <div class="px-4 py-3 bg-zinc-950/50">
-          <div class="flex items-center justify-between mb-2">
+        <div class="px-4 py-3.5 bg-zinc-950/50">
+          <div class="flex items-center justify-between mb-3">
             <p class="font-semibold text-sm text-white">Seconds per puzzle</p>
             <span class="text-amber-400 font-bold tabular-nums text-sm"
                   data-setup-target="secondsDisplay">30</span>
@@ -112,15 +115,15 @@
           <input type="range" name="seconds_per_puzzle"
                  min="10" max="90" value="30" step="5"
                  data-action="input->setup#secondsChanged">
-          <div class="flex justify-between text-zinc-700 text-xs mt-1.5">
+          <div class="flex justify-between text-zinc-700 text-xs mt-2">
             <span>10s</span><span>90s</span>
           </div>
         </div>
 
         <%# Auto-advance row %>
-        <div class="flex items-center gap-3 px-4 py-3 bg-zinc-950/50">
-          <div class="w-8 h-8 rounded-xl bg-zinc-800 flex items-center justify-center flex-shrink-0">
-            <span class="text-sm">⏭</span>
+        <div class="flex items-center gap-3 px-4 py-3.5 bg-zinc-950/50">
+          <div class="w-9 h-9 rounded-xl bg-zinc-800 flex items-center justify-center flex-shrink-0">
+            <span class="text-base">⏭</span>
           </div>
           <div class="flex-1 min-w-0">
             <p class="font-semibold text-sm text-white">Auto-advance</p>
@@ -140,27 +143,27 @@
 
     </div>
 
-    <%# Spacer — absorbs remaining space so button stays at bottom %>
-    <div class="flex-1"></div>
+    <%# Bottom bar + button grouped so justify-between pushes them to the bottom %>
+    <div class="flex-shrink-0 flex flex-col gap-3">
 
-    <%# Bottom info bar %>
-    <div class="flex items-center justify-between text-xs font-medium flex-shrink-0">
-      <span class="flex items-center gap-1.5 text-zinc-600">
-        🔥 <span>3-day streak</span>
-      </span>
-      <span class="text-zinc-700">
-        <%= puzzle_count %> puzzles &middot; ~<%= (puzzle_count * 30 / 60.0).ceil %> min
-      </span>
+      <div class="flex items-center justify-between text-xs font-medium">
+        <span class="flex items-center gap-1.5 text-zinc-600">
+          🔥 <span>3-day streak</span>
+        </span>
+        <span class="text-zinc-700">
+          <%= puzzle_count %> puzzles &middot; ~<%= (puzzle_count * 30 / 60.0).ceil %> min
+        </span>
+      </div>
+
+      <button type="submit"
+              class="w-full font-black text-xl py-5 rounded-full
+                     active:scale-95 transition-transform tracking-tight text-zinc-950"
+              style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+                     box-shadow: 0 0 28px rgba(251,191,36,0.22);">
+        Start Run →
+      </button>
+
     </div>
-
-    <%# Start button %>
-    <button type="submit"
-            class="w-full font-black text-xl py-4 rounded-full flex-shrink-0
-                   active:scale-95 transition-transform tracking-tight text-zinc-950"
-            style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-                   box-shadow: 0 0 28px rgba(251,191,36,0.22);">
-      Start Run →
-    </button>
 
   <% end %>
 
