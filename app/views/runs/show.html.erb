@@ -17,22 +17,23 @@
     <input type="hidden" name="outcome" value="skipped" data-puzzle-target="outcomeField">
   </form>
 
-  <%# Progress bar + meta %>
-  <div class="flex items-center justify-between mb-10">
+  <%# Progress %>
+  <div class="flex items-center mb-10">
     <span class="text-zinc-600 text-sm font-medium tabular-nums">
       <%= position %> / <%= total %>
     </span>
-    <span class="text-xs uppercase tracking-widest text-zinc-700 font-semibold">
-      <%= riddle.category&.tr("_", " ") %>
-    </span>
   </div>
 
-  <%# Question — centre of the screen %>
+  <%# Question — owns the screen %>
   <div class="flex-1 flex flex-col justify-center gap-8">
-    <p class="text-3xl font-bold leading-tight tracking-tight"
-       data-puzzle-target="question">
-      <%= riddle.question %>
-    </p>
+    <div>
+      <p class="font-black leading-tight tracking-tight"
+         style="font-size: clamp(2rem, 9vw, 3.25rem);"
+         data-puzzle-target="question">
+        <%= riddle.question %>
+      </p>
+      <p class="text-zinc-700 text-sm mt-4">Keep running. Keep thinking.</p>
+    </div>
 
     <%# Timer (only rendered when run is timed) %>
     <% if @run.timed %>
@@ -45,14 +46,14 @@
                     fill="none" stroke="#27272a" stroke-width="2.8"/>
             <circle cx="18" cy="18" r="15.9"
                     fill="none" stroke="#fbbf24" stroke-width="2.8"
-                    stroke-dasharray="100" stroke-dashoffset="0"
+                    stroke-dasharray="100" stroke-dashoffset="100"
                     stroke-linecap="round"
                     data-puzzle-target="timerRing"/>
           </svg>
           <span class="absolute inset-0 flex items-center justify-center
                        font-bold tabular-nums text-sm text-white"
                 data-puzzle-target="timerDisplay">
-            <%= @run.seconds_per_puzzle %>
+            0
           </span>
         </div>
 
@@ -86,7 +87,7 @@
             class="flex-1 border border-zinc-800 text-zinc-500 font-semibold
                    py-5 rounded-2xl active:border-zinc-600 active:text-zinc-300
                    transition-colors text-sm">
-      Reveal
+      Show answer
     </button>
     <button type="button"
             data-action="click->puzzle#next"

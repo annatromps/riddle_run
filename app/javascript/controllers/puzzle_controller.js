@@ -10,12 +10,11 @@ export default class extends Controller {
   }
 
   connect() {
-    this.timeLeft = this.secondsValue
+    this.elapsed  = 0
     this.paused   = false
     this.revealed = false
 
     if (this.audioValue) {
-      // Small delay so Turbo has finished painting before we speak
       setTimeout(() => this.speak(this.questionTarget.textContent.trim()), 400)
     }
 
@@ -62,9 +61,9 @@ export default class extends Controller {
   startTimer() {
     this.interval = setInterval(() => {
       if (this.paused) return
-      this.timeLeft = Math.max(0, this.timeLeft - 1)
+      this.elapsed += 1
       this.updateRing()
-      if (this.timeLeft === 0) {
+      if (this.elapsed >= this.secondsValue) {
         this.stopTimer()
         if (this.autoAdvanceValue) this.advance()
       }
@@ -80,11 +79,11 @@ export default class extends Controller {
 
   updateRing() {
     if (this.hasTimerDisplayTarget) {
-      this.timerDisplayTarget.textContent = this.timeLeft
+      this.timerDisplayTarget.textContent = this.elapsed
     }
     if (this.hasTimerRingTarget) {
-      const pct = this.secondsValue > 0 ? this.timeLeft / this.secondsValue : 0
-      // stroke-dasharray="100", sweep from full (offset 0) to empty (offset 100)
+      const pct = this.secondsValue > 0 ? Math.min(this.elapsed / this.secondsValue, 1) : 0
+      // stroke-dasharray="100", starts empty (offset 100) and fills as time passes (offset → 0)
       this.timerRingTarget.style.strokeDashoffset = ((1 - pct) * 100).toFixed(2)
     }
   }

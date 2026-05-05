@@ -22,7 +22,7 @@
         <span class="text-amber-400 block">RUN</span>
       </h1>
       <p class="text-zinc-500 mt-4 text-base leading-snug max-w-[260px]">
-        Push your mind while you push your pace.
+        Hard puzzles for long runs. No rush.
       </p>
     </div>
   </div>
@@ -31,17 +31,17 @@
         data: { controller: "setup" },
         class: "flex-1 flex flex-col gap-5" do %>
 
-    <%# Difficulty cards %>
+    <%# Question style cards %>
     <div>
-      <p class="text-xs uppercase tracking-widest text-zinc-600 font-semibold mb-3">Difficulty</p>
+      <p class="text-xs uppercase tracking-widest text-zinc-600 font-semibold mb-3">Question style</p>
       <div class="grid grid-cols-3 gap-2">
         <% [
-             ["any",    "🌱", "Easy",   "Warm-up wits"],
-             ["medium", "🔥", "Medium", "Steady pace" ],
-             ["hard",   "⚡", "Hard",   "Brain sprint"]
+             ["word_puzzles", "🔤", "Word",    "Classic puzzles"],
+             ["cryptic",      "🧩", "Cryptic", "Crossword style"],
+             ["mix",          "🎲", "Mix",     "Blend of both"]
            ].each_with_index do |(value, icon, label, sublabel), i| %>
           <label class="cursor-pointer group">
-            <input type="radio" name="difficulty" value="<%= value %>"
+            <input type="radio" name="question_style" value="<%= value %>"
                    class="sr-only" <%= i == 0 ? "checked" : "" %>>
             <div class="border border-zinc-800 rounded-2xl p-3 text-center transition-all duration-150
                         group-has-[input:checked]:border-amber-400/60

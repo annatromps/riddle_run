@@ -7,17 +7,25 @@ class RunsController < ApplicationController
   end
 
   def create
-    riddles = Riddle.published.order(Arel.sql("RANDOM()")).to_a
+    question_style = params[:question_style].presence_in(Run::QUESTION_STYLES) || "word_puzzles"
+
+    riddles = case question_style
+              when "cryptic" then Riddle.published.where(category: "cryptic")
+              when "mix"     then Riddle.published
+              else                Riddle.published.where(category: Run::WORD_CATEGORIES)
+              end
+    riddles = riddles.order(Arel.sql("RANDOM()")).to_a
 
     if riddles.empty?
       redirect_to new_run_path, alert: "No puzzles available yet." and return
     end
 
     @run = Run.new(
-      audio_enabled:     params[:audio_enabled] == "1",
-      timed:             params[:timed] == "1",
+      question_style:     question_style,
+      audio_enabled:      params[:audio_enabled] == "1",
+      timed:              params[:timed] == "1",
       seconds_per_puzzle: params[:seconds_per_puzzle].to_i.clamp(10, 90),
-      auto_advance:      params[:auto_advance] == "1"
+      auto_advance:       params[:auto_advance] == "1"
     )
 
     Run.transaction do
