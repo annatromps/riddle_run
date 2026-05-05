@@ -1,0 +1,52 @@
+<div class="min-h-screen flex flex-col items-center justify-center px-6 py-12">
+
+  <div class="w-full max-w-sm space-y-10">
+
+    <div class="text-center space-y-2">
+      <h1 class="text-5xl font-black tracking-tight">Riddle Run</h1>
+      <p class="text-zinc-400 text-lg">Audio riddles for your run</p>
+    </div>
+
+    <%= form_with url: runs_path, method: :post, class: "space-y-8" do |f| %>
+
+      <div class="space-y-3">
+        <p class="text-sm font-semibold text-zinc-400 uppercase tracking-widest">Difficulty</p>
+        <div class="grid grid-cols-2 gap-3">
+          <% [["easy", "Easy", "text-green-400"], ["medium", "Medium", "text-yellow-400"], ["hard", "Hard", "text-red-400"], ["any", "Any", "text-zinc-300"]].each do |value, label, colour| %>
+            <label class="relative cursor-pointer">
+              <input type="radio" name="difficulty" value="<%= value %>" class="sr-only peer" <%= value == "any" ? "checked" : "" %>>
+              <div class="border-2 border-zinc-700 rounded-2xl py-4 text-center font-bold text-lg
+                          peer-checked:border-white peer-checked:bg-zinc-800 transition-colors">
+                <span class="<%= colour %>"><%= label %></span>
+              </div>
+            </label>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <p class="text-sm font-semibold text-zinc-400 uppercase tracking-widest">Riddles</p>
+        <div class="grid grid-cols-4 gap-2">
+          <% [5, 10, 15, 20].each do |n| %>
+            <label class="relative cursor-pointer">
+              <input type="radio" name="riddle_count" value="<%= n %>" class="sr-only peer" <%= n == 10 ? "checked" : "" %>>
+              <div class="border-2 border-zinc-700 rounded-xl py-3 text-center font-bold text-xl
+                          peer-checked:border-white peer-checked:bg-zinc-800 transition-colors">
+                <%= n %>
+              </div>
+            </label>
+          <% end %>
+        </div>
+      </div>
+
+      <button type="submit"
+              class="w-full bg-white text-zinc-950 font-black text-xl py-5 rounded-2xl
+                     active:scale-95 transition-transform">
+        Start Run →
+      </button>
+
+    <% end %>
+
+  </div>
+
+</div>
