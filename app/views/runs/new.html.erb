@@ -1,80 +1,138 @@
-<div class="min-h-screen flex flex-col px-5 pt-14 pb-10 max-w-sm mx-auto">
+<% puzzle_count = Riddle.published.count %>
 
-  <%# Header %>
+<div class="min-h-screen flex flex-col px-5 pt-10 pb-8 max-w-sm mx-auto">
+
+  <%# Pill badge %>
   <div class="mb-10">
-    <h1 class="text-5xl font-bold tracking-tight leading-none">RIDDLE<br>RUN</h1>
-    <p class="text-zinc-500 mt-3 text-sm tracking-wide">Puzzles for your run</p>
+    <span class="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-800
+                 text-zinc-400 text-xs font-bold px-3 py-1.5 rounded-full tracking-widest uppercase">
+      <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+      Daily Run &middot; <%= puzzle_count %>
+    </span>
   </div>
 
-  <%# Form %>
+  <%# Hero — warm glow sits behind the title %>
+  <div class="relative mb-10">
+    <div class="absolute -top-6 -left-10 w-72 h-48
+                bg-amber-500/10 blur-3xl rounded-full pointer-events-none"></div>
+    <div class="relative">
+      <h1 class="font-black uppercase leading-[0.82] tracking-tight"
+          style="font-size: clamp(4rem, 20vw, 5.5rem);">
+        <span class="text-white block">RIDDLE</span>
+        <span class="text-amber-400 block">RUN</span>
+      </h1>
+      <p class="text-zinc-500 mt-4 text-base leading-snug max-w-[260px]">
+        Push your mind while you push your pace.
+      </p>
+    </div>
+  </div>
+
   <%= form_with url: runs_path, method: :post,
         data: { controller: "setup" },
-        class: "flex-1 flex flex-col gap-6" do %>
+        class: "flex-1 flex flex-col gap-5" do %>
 
-    <%# Settings card %>
-    <div class="rounded-2xl border border-zinc-800 overflow-hidden divide-y divide-zinc-800">
+    <%# Difficulty cards %>
+    <div>
+      <p class="text-xs uppercase tracking-widest text-zinc-600 font-semibold mb-3">Difficulty</p>
+      <div class="grid grid-cols-3 gap-2">
+        <% [
+             ["any",    "🌱", "Easy",   "Warm-up wits"],
+             ["medium", "🔥", "Medium", "Steady pace" ],
+             ["hard",   "⚡", "Hard",   "Brain sprint"]
+           ].each_with_index do |(value, icon, label, sublabel), i| %>
+          <label class="cursor-pointer group">
+            <input type="radio" name="difficulty" value="<%= value %>"
+                   class="sr-only" <%= i == 0 ? "checked" : "" %>>
+            <div class="border border-zinc-800 rounded-2xl p-3 text-center transition-all duration-150
+                        group-has-[input:checked]:border-amber-400/60
+                        group-has-[input:checked]:bg-amber-400/[0.05]">
+              <p class="text-xl mb-1.5"><%= icon %></p>
+              <p class="font-bold text-sm text-white leading-tight"><%= label %></p>
+              <p class="text-zinc-600 text-[11px] mt-0.5 leading-tight"><%= sublabel %></p>
+              <p class="text-amber-400 text-xs font-black mt-2 h-3
+                        opacity-0 group-has-[input:checked]:opacity-100 transition-opacity">✓</p>
+            </div>
+          </label>
+        <% end %>
+      </div>
+    </div>
+
+    <%# Options card %>
+    <div class="rounded-2xl border border-zinc-800 overflow-hidden divide-y divide-zinc-800 bg-zinc-900/50">
 
       <%# Audio row %>
-      <div class="flex items-center justify-between px-5 py-4 bg-zinc-900">
-        <div>
-          <p class="font-semibold text-sm">Audio</p>
-          <p class="text-zinc-500 text-xs mt-0.5">Read questions aloud</p>
+      <div class="flex items-center gap-3 px-4 py-3.5">
+        <div class="w-9 h-9 rounded-xl bg-zinc-800 flex items-center justify-center flex-shrink-0">
+          <span class="text-base">🔊</span>
         </div>
-        <div class="relative w-14 h-7 flex-shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="font-semibold text-sm text-white">Audio</p>
+          <p class="text-zinc-600 text-xs mt-0.5">Read questions aloud</p>
+        </div>
+        <div class="relative w-12 h-6 flex-shrink-0">
           <input type="checkbox" name="audio_enabled" value="1" id="audio_enabled"
                  class="sr-only peer" checked>
           <label for="audio_enabled"
                  class="absolute inset-0 rounded-full bg-zinc-700 peer-checked:bg-amber-400 transition-colors duration-200 cursor-pointer"></label>
-          <div class="absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-white shadow transition-transform duration-200 peer-checked:translate-x-7 pointer-events-none"></div>
+          <div class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm
+                      transition-transform duration-200 peer-checked:translate-x-6 pointer-events-none"></div>
         </div>
       </div>
 
-      <%# Timed row %>
-      <div class="flex items-center justify-between px-5 py-4 bg-zinc-900">
-        <div>
-          <p class="font-semibold text-sm">Timer</p>
-          <p class="text-zinc-500 text-xs mt-0.5">Countdown for each puzzle</p>
+      <%# Timer row %>
+      <div class="flex items-center gap-3 px-4 py-3.5">
+        <div class="w-9 h-9 rounded-xl bg-zinc-800 flex items-center justify-center flex-shrink-0">
+          <span class="text-base">⏱</span>
         </div>
-        <div class="relative w-14 h-7 flex-shrink-0">
+        <div class="flex-1 min-w-0">
+          <p class="font-semibold text-sm text-white">Timer</p>
+          <p class="text-zinc-600 text-xs mt-0.5">Countdown for each puzzle</p>
+        </div>
+        <div class="relative w-12 h-6 flex-shrink-0">
           <input type="checkbox" name="timed" value="1" id="timed"
                  class="sr-only peer"
                  data-action="change->setup#timedChanged">
           <label for="timed"
                  class="absolute inset-0 rounded-full bg-zinc-700 peer-checked:bg-amber-400 transition-colors duration-200 cursor-pointer"></label>
-          <div class="absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-white shadow transition-transform duration-200 peer-checked:translate-x-7 pointer-events-none"></div>
+          <div class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm
+                      transition-transform duration-200 peer-checked:translate-x-6 pointer-events-none"></div>
         </div>
       </div>
 
-      <%# Timed sub-options (hidden until timer is on) %>
+      <%# Timed sub-options — hidden until timer is on %>
       <div data-setup-target="timedOptions" class="hidden divide-y divide-zinc-800/60">
 
-        <%# Seconds per puzzle %>
-        <div class="px-5 py-4 bg-zinc-950/80">
+        <%# Seconds slider %>
+        <div class="px-4 py-4 bg-zinc-950/50">
           <div class="flex items-center justify-between mb-3">
-            <p class="font-semibold text-sm">Seconds per puzzle</p>
-            <span class="text-amber-400 font-bold tabular-nums"
+            <p class="font-semibold text-sm text-white">Seconds per puzzle</p>
+            <span class="text-amber-400 font-bold tabular-nums text-sm"
                   data-setup-target="secondsDisplay">30</span>
           </div>
           <input type="range" name="seconds_per_puzzle"
                  min="10" max="90" value="30" step="5"
                  data-action="input->setup#secondsChanged">
-          <div class="flex justify-between text-zinc-600 text-xs mt-2">
+          <div class="flex justify-between text-zinc-700 text-xs mt-2">
             <span>10s</span><span>90s</span>
           </div>
         </div>
 
         <%# Auto-advance row %>
-        <div class="flex items-center justify-between px-5 py-4 bg-zinc-950/80">
-          <div>
-            <p class="font-semibold text-sm">Auto-advance</p>
-            <p class="text-zinc-500 text-xs mt-0.5">Move on when timer hits zero</p>
+        <div class="flex items-center gap-3 px-4 py-3.5 bg-zinc-950/50">
+          <div class="w-9 h-9 rounded-xl bg-zinc-800 flex items-center justify-center flex-shrink-0">
+            <span class="text-base">⏭</span>
           </div>
-          <div class="relative w-14 h-7 flex-shrink-0">
+          <div class="flex-1 min-w-0">
+            <p class="font-semibold text-sm text-white">Auto-advance</p>
+            <p class="text-zinc-600 text-xs mt-0.5">Move on when timer hits zero</p>
+          </div>
+          <div class="relative w-12 h-6 flex-shrink-0">
             <input type="checkbox" name="auto_advance" value="1" id="auto_advance"
                    class="sr-only peer" checked>
             <label for="auto_advance"
                    class="absolute inset-0 rounded-full bg-zinc-700 peer-checked:bg-amber-400 transition-colors duration-200 cursor-pointer"></label>
-            <div class="absolute top-0.5 left-0.5 w-6 h-6 rounded-full bg-white shadow transition-transform duration-200 peer-checked:translate-x-7 pointer-events-none"></div>
+            <div class="absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm
+                        transition-transform duration-200 peer-checked:translate-x-6 pointer-events-none"></div>
           </div>
         </div>
 
@@ -85,10 +143,22 @@
     <%# Spacer %>
     <div class="flex-1"></div>
 
-    <%# Start button %>
+    <%# Bottom info bar %>
+    <div class="flex items-center justify-between text-xs font-medium pb-3">
+      <span class="flex items-center gap-1.5 text-zinc-600">
+        🔥 <span>3-day streak</span>
+      </span>
+      <span class="text-zinc-700">
+        <%= puzzle_count %> puzzles &middot; ~<%= (puzzle_count * 30 / 60.0).ceil %> min
+      </span>
+    </div>
+
+    <%# Start button — amber gradient pill %>
     <button type="submit"
-            class="w-full bg-amber-400 text-zinc-950 font-bold text-xl py-5 rounded-2xl
-                   active:scale-95 transition-transform tracking-tight">
+            class="w-full font-black text-xl py-5 rounded-full
+                   active:scale-95 transition-transform tracking-tight text-zinc-950"
+            style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+                   box-shadow: 0 0 28px rgba(251,191,36,0.22);">
       Start Run →
     </button>
 
