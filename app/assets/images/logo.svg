@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 360">
+
+  <!-- Dark navy background -->
+  <rect width="300" height="360" fill="#0c1a28" rx="28"/>
+
+  <!-- Bold question mark — stroke traces the spine of the glyph -->
+  <path d="M 100,122
+           C 97,82 122,48 158,44
+           C 194,40 224,66 224,103
+           C 224,134 207,158 181,169
+           C 170,174 162,185 162,196
+           L 162,238"
+        fill="none"
+        stroke="#f0ebe0"
+        stroke-width="32"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Question mark dot -->
+  <circle cx="162" cy="274" r="16" fill="#f0ebe0"/>
+
+  <!--
+    Running figure — mid-stride, leaning forward, fleeing to the right.
+    Head just below the dot; one arm pumping forward, one trailing back;
+    leading leg striding out, trailing leg kicking behind.
+  -->
+  <g fill="none" stroke="#f0ebe0" stroke-width="3.5"
+     stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- Head (solid) -->
+    <circle cx="210" cy="299" r="6.5" fill="#f0ebe0" stroke="none"/>
+
+    <!-- Torso: neck → hip, leaning forward -->
+    <line x1="212" y1="306" x2="220" y2="322"/>
+
+    <!-- Forward arm: upper arm left, forearm angling up-forward -->
+    <polyline points="215,311 204,310 197,302"/>
+
+    <!-- Back arm: upper arm right, forearm trailing down-back -->
+    <polyline points="216,313 227,317 233,325"/>
+
+    <!-- Forward leg: thigh forward, knee snaps, foot strikes -->
+    <polyline points="220,322 229,332 236,328 241,339"/>
+
+    <!-- Back leg: thigh trailing, lower leg kicking behind -->
+    <polyline points="220,322 214,334 218,344"/>
+
+  </g>
+
+</svg>
