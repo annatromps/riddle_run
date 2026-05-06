@@ -26,13 +26,20 @@
 
   <%# Question — owns the screen %>
   <div class="flex-1 flex flex-col justify-center gap-8">
-    <div>
-      <p class="font-black leading-tight tracking-tight"
-         style="font-size: clamp(2rem, 9vw, 3.25rem);"
-         data-puzzle-target="question">
-        <%= riddle.question %>
-      </p>
-      <p class="text-zinc-700 text-sm mt-4">Keep running. Keep thinking.</p>
+    <div class="relative py-8 cursor-pointer"
+         data-action="click->puzzle#replayQuestion">
+      <%# Faint tap-hint circle %>
+      <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-center pointer-events-none">
+        <div class="w-72 h-72 rounded-full bg-white/[0.03] border border-white/[0.05]"></div>
+      </div>
+      <div class="relative">
+        <p class="font-black leading-tight tracking-tight"
+           style="font-size: clamp(2rem, 9vw, 3.25rem);"
+           data-puzzle-target="question">
+          <%= riddle.question %>
+        </p>
+        <p class="text-zinc-700 text-sm mt-4">Keep running. Keep thinking.</p>
+      </div>
     </div>
 
     <%# Timer (only rendered when run is timed) %>
@@ -69,10 +76,15 @@
     <% end %>
 
     <%# Answer section — hidden until reveal %>
-    <div class="hidden items-start gap-3 border-l-2 border-amber-400 pl-4"
+    <div class="hidden items-start border-l-2 border-amber-400 pl-4 relative py-6 cursor-pointer"
          data-puzzle-target="answerSection"
-         data-answer="<%= riddle.answer %>">
-      <div>
+         data-answer="<%= riddle.answer %>"
+         data-action="click->puzzle#replayAnswer">
+      <%# Faint tap-hint circle %>
+      <div class="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-center pointer-events-none">
+        <div class="w-60 h-60 rounded-full bg-amber-400/[0.04] border border-amber-400/[0.06]"></div>
+      </div>
+      <div class="relative">
         <p class="text-xs uppercase tracking-widest text-zinc-500 mb-1">Answer</p>
         <p class="text-2xl font-bold leading-snug"><%= riddle.answer %></p>
       </div>

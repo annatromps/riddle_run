@@ -115,6 +115,18 @@ export default class extends Controller {
     }
   }
 
+  // ── Replay ────────────────────────────────────────────────────────────────
+
+  replayQuestion() {
+    if (!this.audioValue) return
+    this.speak(this.questionTarget.textContent.trim())
+  }
+
+  replayAnswer() {
+    if (!this.audioValue || !this.revealed) return
+    this.speak(this.answerSectionTarget.dataset.answer)
+  }
+
   // ── Advance ───────────────────────────────────────────────────────────────
 
   next(event) {
