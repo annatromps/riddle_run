@@ -2,7 +2,7 @@
 <% total    = @run.attempts.count %>
 <% position = @attempt.position + 1 %>
 
-<div class="min-h-screen flex flex-col px-5 pt-10 pb-8 max-w-sm mx-auto"
+<div class="min-h-full flex flex-col px-5 pt-10 pb-8 max-w-sm mx-auto"
      data-controller="puzzle"
      data-puzzle-audio-value="<%= @run.audio_enabled %>"
      data-puzzle-timed-value="<%= @run.timed %>"
