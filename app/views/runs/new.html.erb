@@ -28,13 +28,8 @@
     </div>
   </div>
 
-  <%# Pill badge + info button %>
-  <div class="mb-[3vh] flex-shrink-0 flex items-center justify-between">
-    <span class="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-800
-                 text-zinc-400 text-xs font-bold px-3 py-1.5 rounded-full tracking-widest uppercase">
-      <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-      Daily Run &middot; <%= puzzle_count %>
-    </span>
+  <%# Info button %>
+  <div class="mb-[3vh] flex-shrink-0 flex items-center justify-end">
     <button type="button"
             data-action="click->info#show"
             class="w-8 h-8 rounded-full border-2 border-zinc-500 text-zinc-200
@@ -75,7 +70,7 @@
              ["cryptic",      "🧩", "Cryptic", "Crossword style"],
              ["mix",          "🎲", "Mix",     "Blend of both"]
            ].each_with_index do |(value, icon, label, sublabel), i| %>
-          <label class="cursor-pointer group">
+          <label class="cursor-pointer group aspect-square">
             <input type="radio" name="question_style" value="<%= value %>"
                    class="sr-only" <%= i == 0 ? "checked" : "" %>>
             <div class="h-full border border-zinc-800 rounded-2xl p-3 text-center transition-all duration-150
@@ -177,12 +172,6 @@
 
     <%# Bottom bar + button grouped so justify-between pushes them to the bottom %>
     <div class="flex-shrink-0 flex flex-col gap-3">
-
-      <div class="flex items-center text-xs font-medium">
-        <span class="flex items-center gap-1.5 text-zinc-600">
-          🔥 <span>3-day streak</span>
-        </span>
-      </div>
 
       <button type="submit"
               class="w-full font-black text-xl py-5 rounded-full
