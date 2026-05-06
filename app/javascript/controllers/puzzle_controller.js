@@ -22,11 +22,14 @@ export default class extends Controller {
       this.updateRing()
       this.startTimer()
     }
+
+    this.startListening()
   }
 
   disconnect() {
     this.stopTimer()
     this.cancelSpeech()
+    this.stopListening()
   }
 
   // ── Speech ────────────────────────────────────────────────────────────────
@@ -34,11 +37,13 @@ export default class extends Controller {
   speak(text) {
     if (!("speechSynthesis" in window)) return
     this.cancelSpeech()
+    this.pauseListening()
     const utter = new SpeechSynthesisUtterance(text)
     utter.rate  = 0.92
     utter.pitch = 1.0
     const voice = this.bestVoice()
     if (voice) utter.voice = voice
+    utter.onend = () => this.resumeListening()
     window.speechSynthesis.speak(utter)
   }
 
@@ -54,6 +59,66 @@ export default class extends Controller {
       voices.find(v => v.lang.startsWith("en")) ||
       null
     )
+  }
+
+  // ── Voice commands ────────────────────────────────────────────────────────
+
+  startListening() {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition
+    if (!SR) return
+
+    this.listeningActive = true
+    this.speechActive    = false
+    this.recognition     = new SR()
+    this.recognition.continuous     = true
+    this.recognition.interimResults = false
+    this.recognition.lang           = "en-GB"
+
+    this.recognition.onresult = (event) => {
+      const last = event.results[event.results.length - 1]
+      if (!last.isFinal) return
+      const t = last[0].transcript.trim().toLowerCase()
+      if (t.includes("next"))   this.advance()
+      else if (t.includes("answer")) this.reveal()
+    }
+
+    this.recognition.onerror = (event) => {
+      if (event.error === "not-allowed" || event.error === "service-not-allowed") {
+        this.listeningActive = false
+      }
+    }
+
+    // Continuous mode still ends on silence on some browsers — restart automatically
+    this.recognition.onend = () => {
+      if (this.listeningActive && !this.speechActive) {
+        try { this.recognition.start() } catch (_) {}
+      }
+    }
+
+    try { this.recognition.start() } catch (_) {}
+  }
+
+  pauseListening() {
+    this.speechActive = true
+    if (this.recognition) {
+      try { this.recognition.abort() } catch (_) {}
+    }
+  }
+
+  resumeListening() {
+    this.speechActive = false
+    if (this.listeningActive && this.recognition) {
+      try { this.recognition.start() } catch (_) {}
+    }
+  }
+
+  stopListening() {
+    this.listeningActive = false
+    this.speechActive    = false
+    if (this.recognition) {
+      try { this.recognition.abort() } catch (_) {}
+      this.recognition = null
+    }
   }
 
   // ── Timer ─────────────────────────────────────────────────────────────────
@@ -137,6 +202,7 @@ export default class extends Controller {
   advance() {
     this.stopTimer()
     this.cancelSpeech()
+    this.stopListening()
     if (this.hasOutcomeFieldTarget) {
       this.outcomeFieldTarget.value = this.revealed ? "revealed" : "skipped"
     }
